@@ -83,7 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-
   void initData() {
     /*
       bottom的按压图片
@@ -92,7 +91,6 @@ class _MyHomePageState extends State<MyHomePage> {
       [
         getTabImage('images/main_find_icon.png'),
         getTabImage('images/main_find_icon_select.png')
-
       ],
       [
         getTabImage('images/main_find_icon.png'),
@@ -107,7 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
         getTabImage('images/main_find_icon_select.png')
       ]
     ];
-
   }
 
   void _incrementCounter() {
@@ -133,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title+_counter.toString()),
+        title: Text(widget.title + _counter.toString()),
       ),
       body: _bodys[_tabIndex],
       floatingActionButton: FloatingActionButton(

@@ -1,17 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
-class MyPage extends StatelessWidget {
+class MyPage extends StatefulWidget {
+  @override
+  _WebViewExampleState createState() => _WebViewExampleState();
+}
+
+class _WebViewExampleState extends State<MyPage> {
+  TextEditingController controller = TextEditingController();
+  FlutterWebviewPlugin flutterWebviewPlugin = FlutterWebviewPlugin();
+  var urlString = "https://www.baidu.com";
+
+  launchUrl() {
+    setState(() {
+      urlString = controller.text;
+      flutterWebviewPlugin.reloadUrl(urlString);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    flutterWebviewPlugin.onStateChanged.listen((WebViewStateChanged wvs) {
+      print(wvs.type);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Flutter Demo',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
+    return WebviewScaffold(
+      appBar: AppBar(
+        title: TextField(
+          autofocus: false,
+          controller: controller,
+          textInputAction: TextInputAction.go,
+          onSubmitted: (url) => launchUrl(),
+          style: TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: "Enter Url Here",
+            hintStyle: TextStyle(color: Colors.white),
+          ),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.navigate_next),
+            onPressed: () => launchUrl(),
+          )
+        ],
       ),
-      debugShowCheckedModeBanner: false,
-      home: new Scaffold(
-        body: new Center(child:new Text("我的")),
-      ),
+      url: urlString,
+      withZoom: false,
     );
   }
 }
