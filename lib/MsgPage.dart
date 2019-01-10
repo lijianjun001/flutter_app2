@@ -1,5 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/WebPage.dart';
 
 class RandomWords extends StatefulWidget {
   @override
@@ -68,27 +69,11 @@ class RandomWordsState extends State<RandomWords> {
     Navigator.of(context).push(
       new MaterialPageRoute(
         builder: (context) {
-          final tiles = _saved.map(
-            (pair) {
-              return new ListTile(
-                title: new Text(
-                  pair.asPascalCase,
-                  style: _biggerFont,
-                ),
-              );
-            },
-          );
-          final divided = ListTile.divideTiles(
-            context: context,
-            tiles: tiles,
-            color: Colors.red
-          ).toList();
-
           return new Scaffold(
             appBar: new AppBar(
               title: new Text('route'),
             ),
-            body: new ListView(children: divided),
+            body: WebPage(),
           );
         },
       ),
@@ -100,7 +85,6 @@ class MsgPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: new Scaffold(
         body: new RandomWords(),
       ),

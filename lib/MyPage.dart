@@ -1,57 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-
-class MyPage extends StatefulWidget {
+import 'package:english_words/english_words.dart';
+class RandomWords extends StatefulWidget {
   @override
-  _WebViewExampleState createState() => _WebViewExampleState();
+  createState() => new RandomWordsState();
 }
-
-class _WebViewExampleState extends State<MyPage> {
-  TextEditingController controller = TextEditingController();
-  FlutterWebviewPlugin flutterWebviewPlugin = FlutterWebviewPlugin();
-  var urlString = "https://www.baidu.com";
-
-  launchUrl() {
-    setState(() {
-      urlString = controller.text;
-      flutterWebviewPlugin.reloadUrl(urlString);
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    flutterWebviewPlugin.onStateChanged.listen((WebViewStateChanged wvs) {
-      print(wvs.type);
-    });
-  }
-
+class RandomWordsState extends State<RandomWords> {
   @override
   Widget build(BuildContext context) {
-    return WebviewScaffold(
-      appBar: AppBar(
-        title: TextField(
-          autofocus: false,
-          controller: controller,
-          textInputAction: TextInputAction.go,
-          onSubmitted: (url) => launchUrl(),
-          style: TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: "Enter Url Here",
-            hintStyle: TextStyle(color: Colors.white),
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.navigate_next),
-            onPressed: () => launchUrl(),
-          )
-        ],
+    final wordPair = new WordPair.random();
+    return new Text(wordPair.asPascalCase);
+  }
+}
+class MyPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      home: new Scaffold(
+        body: new RandomWords(),
       ),
-      url: urlString,
-      withZoom: false,
     );
   }
 }
