@@ -1,7 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/WebPage.dart';
-
+import 'package:flutter_app/MyPage.dart';
 class RandomWords extends StatefulWidget {
   @override
   createState() => new RandomWordsState();
@@ -73,7 +72,7 @@ class RandomWordsState extends State<RandomWords> {
             appBar: new AppBar(
               title: new Text('route'),
             ),
-            body: WebPage(),
+            body: new MyPage(),
           );
         },
       ),

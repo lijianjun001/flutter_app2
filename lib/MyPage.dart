@@ -34,7 +34,7 @@ class MyPage extends StatelessWidget {
           new Icon(
             Icons.settings_input_svideo,
             color: Colors.red[500],
-            size: 30.0,
+            size: 30,
           ),
           new Text('41'),
         ],
